@@ -50,9 +50,9 @@ class App extends React.Component {
 
     // Load the last 10 messages in the window.
     this.socket.on('init', (msg) => {
-      let msgReversed = msg.reverse();
+      // let msgReversed = msg.reverse();
       this.setState((state) => ({
-        chat: [...state.chat, ...msgReversed],
+        chat: [...state.chat, ...msg],
       }), this.scrollToBottom);
     });
 
