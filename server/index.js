@@ -6,7 +6,6 @@ const {Server} = require('socket.io');
 // const http = require('http').Server(app);
 // const path = require('path');
 // const io = require('socket.io')(http);
-//
 
 const Message = require('./Message');
 const mongoose = require('mongoose');
