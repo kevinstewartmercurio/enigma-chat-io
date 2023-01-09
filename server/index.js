@@ -40,51 +40,50 @@ const io = new Server(server, {
   },
 });
 
-app.get('/', (_req, res, _next) => {
-  res.status(200).json({
-      status: 'success',
-      data: {
-          name: 'enigmachat.io',
-          version: '0.1.0'
-      }
-  });
-});
-
-
-io.on('connection', async (socket) => {
-  // Get the last 10 messages from the database.
-  // Message.find().sort({createdAt: -1}).limit(10).exec((err, messages) => {
-  //   if (err) return console.error(err);
-
-  //   // Send the last messages to the user.
-  //   socket.emit('init', messages);
+app.get('/', (_req, _res, _next) => {
+  // res.status(200).json({
+  //     status: 'success',
+  //     data: {
+  //         name: 'enigmachat.io',
+  //         version: '0.1.0'
+  //     }
   // });
-  const cursor = dbMsgs.find({});
-  let messages = [];
-  await cursor.forEach((msg) => messages.push(msg));
-  socket.emit('init', messages);
 
-
-  // Listen to connected users for a new message.
-  socket.on('message', (msg) => {
-    // Create a message with the content and the name of the user.
-    const message = new Message({
-      name: msg.name,
-      content: msg.content
-    });
-
-    // Save the message to the database.
-    // message.save((err) => {
+  io.on('connection', async (socket) => {
+    // Get the last 10 messages from the database.
+    // Message.find().sort({createdAt: -1}).limit(10).exec((err, messages) => {
     //   if (err) return console.error(err);
+  
+    //   // Send the last messages to the user.
+    //   socket.emit('init', messages);
     // });
-    const result = dbMsgs.insertOne(message);
-    console.log(`document inserted with id: ${result.insertedId}`);
-
-    // Notify all other users about a new message.
-    socket.broadcast.emit('push', msg);
+    const cursor = dbMsgs.find({});
+    let messages = [];
+    await cursor.forEach((msg) => messages.push(msg));
+    socket.emit('init', messages);
+  
+  
+    // Listen to connected users for a new message.
+    socket.on('message', (msg) => {
+      // Create a message with the content and the name of the user.
+      const message = new Message({
+        name: msg.name,
+        content: msg.content
+      });
+  
+      // Save the message to the database.
+      // message.save((err) => {
+      //   if (err) return console.error(err);
+      // });
+      const result = dbMsgs.insertOne(message);
+      console.log(`document inserted with id: ${result.insertedId}`);
+  
+      // Notify all other users about a new message.
+      socket.broadcast.emit('push', msg);
+    });
   });
-});
-
-server.listen(port, () => {
+  
+  server.listen(port, () => {
     console.log('listening on *:' + port);
   });
+});
