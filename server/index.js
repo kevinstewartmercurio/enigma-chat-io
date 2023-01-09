@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const app = express();
 const cors = require('cors');
 const http = require('http');
@@ -40,7 +41,7 @@ const io = new Server(server, {
   },
 });
 
-app.get('/', (_req, res, _next) => {
+router.get('/', (_req, res, _next) => {
   // res.status(200).json({
   //     status: 'success',
   //     data: {
@@ -48,7 +49,8 @@ app.get('/', (_req, res, _next) => {
   //         version: '0.1.0'
   //     }
   // });
-  res.sendFile(path.join(__dirname, '..', 'client', 'build'));
+  // res.sendFile(path.join(__dirname, '..', 'client', 'build'));
+  res.status(200).send("Hi, It works!")  
 });
 
 
