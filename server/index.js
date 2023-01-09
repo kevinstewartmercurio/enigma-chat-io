@@ -4,7 +4,7 @@ const cors = require('cors');
 const http = require('http');
 const {Server} = require('socket.io');
 // const http = require('http').Server(app);
-// const path = require('path');
+const path = require('path');
 // const io = require('socket.io')(http);
 
 const Message = require('./Message');
@@ -34,8 +34,8 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-      // origin: 'http://localhost:3000',
-      origin: 'https://enigmachat.io',
+      origin: 'http://localhost:3000',
+      // origin: 'https://enigmachat.io',
       methods: ['GET', 'POST'],
   },
 });
