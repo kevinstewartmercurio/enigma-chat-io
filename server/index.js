@@ -34,10 +34,20 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-      // origin: 'http://localhost:3000',
-      origin: 'https://enigmachat.io',
+      origin: 'http://localhost:3000',
+      // origin: 'https://enigmachat.io',
       methods: ['GET', 'POST'],
   },
+});
+
+app.get('/', (_req, res, _next) => {
+  res.status(200).json({
+      status: 'success',
+      data: {
+          name: 'enigmachat.io',
+          version: '0.1.0'
+      }
+  });
 });
 
 
