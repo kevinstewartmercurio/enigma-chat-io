@@ -5,7 +5,7 @@ const cors = require('cors');
 const http = require('http');
 const {Server} = require('socket.io');
 // const http = require('http').Server(app);
-const path = require('path');
+// const path = require('path');
 // const io = require('socket.io')(http);
 
 const Message = require('./Message');
@@ -13,9 +13,11 @@ const mongoose = require('mongoose');
 
 mongoose.set('strictQuery', true);
 
-require('dotenv').config()
-const uri = process.env.MONGODB_URI || "mongodb+srv://kevinstewartmercurio:ri2SVriEjJFupxeT@clusterksm.ahcsbsm.mongodb.net/&retryWrites=true&w=majority";
-const port = process.env.PORT || 5000;
+require('dotenv').config({path: '../.env'});
+const uri = process.env.MONGODB_URI;
+// || "mongodb+srv://kevinstewartmercurio:ri2SVriEjJFupxeT@clusterksm.ahcsbsm.mongodb.net/&retryWrites=true&w=majority";
+const port = process.env.PORT;
+//|| 5000;
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
