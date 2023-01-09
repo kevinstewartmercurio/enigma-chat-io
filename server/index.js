@@ -5,24 +5,23 @@ const cors = require('cors');
 const http = require('http');
 const {Server} = require('socket.io');
 // const http = require('http').Server(app);
-// const path = require('path');
+const path = require('path');
 // const io = require('socket.io')(http);
 
 const Message = require('./Message');
-const mongoose = require('mongoose');
 
-mongoose.set('strictQuery', true);
+// const mongoose = require('mongoose');
+// mongoose.set('strictQuery', true);
+// mongoose.connect(uri, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// });
 
 require('dotenv').config({path: '../.env'});
 const uri = process.env.MONGODB_URI;
 // || "mongodb+srv://kevinstewartmercurio:ri2SVriEjJFupxeT@clusterksm.ahcsbsm.mongodb.net/&retryWrites=true&w=majority";
 const port = process.env.PORT;
 //|| 5000;
-
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
 
 const {MongoClient} = require('mongodb');
 const client = new MongoClient(uri, {
@@ -32,7 +31,7 @@ const client = new MongoClient(uri, {
 const database = client.db("enigma-chat-io");
 const dbMsgs = database.collection("messages");
 
-// app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+app.use('/', express.static(path.join(__dirname, '..', 'client', 'build')));
 app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -44,14 +43,7 @@ const io = new Server(server, {
 });
 
 router.get('/', (_req, res, _next) => {
-  // res.status(200).json({
-  //     status: 'success',
-  //     data: {
-  //         name: 'enigmachat.io',
-  //         version: '0.1.0'
-  //     }
-  // });
-  // res.sendFile(path.join(__dirname, '..', 'client', 'build'));
+  console.log("success");
   res.status(200).send("Hi, It works!")  
 });
 
@@ -91,5 +83,5 @@ io.on('connection', async (socket) => {
 });
 
 server.listen(port, () => {
-    console.log('listening on *:' + port);
-  });
+  console.log('listening on *:' + port);
+});
