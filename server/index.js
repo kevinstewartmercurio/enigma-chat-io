@@ -37,13 +37,13 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
       // origin: 'http://localhost:3000',
-      origin: 'https://enigmachat.io',
+      // origin: 'https://enigmachat.io',
+      origin: 'https://enigma-chat-io.herokuapp.com/',
       methods: ['GET', 'POST'],
   },
 });
 
 router.get('/', (_req, res, _next) => {
-  console.log("success");
   res.status(200).send("Hi, It works!")  
 });
 
