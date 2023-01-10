@@ -1,3 +1,6 @@
+// this app is based on the tutorial found below, with adjustments and additions
+// https://dev.to/armelpingault/how-to-create-a-simple-and-beautiful-chat-with-mongodb-express-react-and-node-js-mern-stack-29l6
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';

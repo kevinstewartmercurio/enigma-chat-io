@@ -36,9 +36,10 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-      // origin: 'http://localhost:3000',
-      origin: 'https://enigmachat.io',
-      // origin: 'https://enigma-chat-io.herokuapp.com/',
+      // when changing origin, also change proxy in client/package.json
+      // http://localhost:5000, https://enigma-chat-io.herokuapp.com/
+      origin: 'http://localhost:3000',
+      // origin: 'https://enigmachat.io',
       methods: ['GET', 'POST'],
   },
 });
@@ -49,6 +50,9 @@ router.get('/', (_req, res, _next) => {
 
 
 io.on('connection', async (socket) => {
+  const randomInt = Math.floor(Math.random() * 99999999);
+  const randomName = "user" + randomInt.toString();
+
   // Get the last 10 messages from the database.
   // Message.find().sort({createdAt: -1}).limit(10).exec((err, messages) => {
   //   if (err) return console.error(err);
@@ -59,14 +63,15 @@ io.on('connection', async (socket) => {
   const cursor = dbMsgs.find({});
   let messages = [];
   await cursor.forEach((msg) => messages.push(msg));
-  socket.emit('init', messages);
+  socket.emit('init', messages, randomName);
 
 
   // Listen to connected users for a new message.
   socket.on('message', (msg) => {
     // Create a message with the content and the name of the user.
     const message = new Message({
-      name: msg.name,
+      // name: msg.name,
+      name: randomName,
       content: msg.content
     });
 

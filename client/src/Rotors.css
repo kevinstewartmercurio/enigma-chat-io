@@ -1,0 +1,10 @@
+#rotor-bar {
+    /* border: 2px solid green; */
+    text-align: center;
+}
+
+.rotor {
+    margin-left: 2%;
+    margin-right: 2%;
+    display: inline-block;
+}

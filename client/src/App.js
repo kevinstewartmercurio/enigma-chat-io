@@ -42,6 +42,9 @@ class App extends React.Component {
       chat: [],
       content: '',
       name: '',
+      offset1: 0,
+      offset2: 0,
+      offset3: 0
     };
   }
 
@@ -49,10 +52,11 @@ class App extends React.Component {
     this.socket = io(config[process.env.NODE_ENV].endpoint);
 
     // Load the last 10 messages in the window.
-    this.socket.on('init', (msg) => {
+    this.socket.on('init', (msg, randomName) => {
       // let msgReversed = msg.reverse();
       this.setState((state) => ({
         chat: [...state.chat, ...msg],
+        name: randomName
       }), this.scrollToBottom);
     });
 
@@ -105,6 +109,28 @@ class App extends React.Component {
     chat.scrollTop = chat.scrollHeight;
   }
 
+  shareOffsets(n, offset) {
+    switch (n) {
+      case 1:
+        this.setState({
+          offset1: offset
+        });
+        break;
+      case 2:
+        this.setState({
+          offset2: offset
+        });
+        break;
+      case 3:
+        this.setState({
+          offset3: offset
+        });
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -123,11 +149,16 @@ class App extends React.Component {
           })}
         </Paper>
         <BottomBar
+          id="bottomBar"
           content={this.state.content}
           handleContent={this.handleContent.bind(this)}
           handleName={this.handleName.bind(this)}
           handleSubmit={this.handleSubmit.bind(this)}
           name={this.state.name}
+          shareOffsets={this.shareOffsets.bind(this)}
+          offset1={this.state.offset1}
+          offset2={this.state.offset2}
+          offset3={this.state.offset3}
         />
       </div>
     );
