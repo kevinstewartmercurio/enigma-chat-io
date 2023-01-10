@@ -21,16 +21,16 @@ async function main() {
     // const database = client.db("enigma-chat-io");
     // const dbMsgs = database.collection("messages");
     // const docs = [
-    //     {name: "kevin", content: "hello, again, world", time: 0},
-    //     {name: "isabelle", content: "i've had a thought", time: 1},
-    //     {name: "susannah", content: "super mario", time: 2},
-    //     {name: "maddie", content: "little susie's worker", time: 3},
-    //     {name: "adam", content: "arizona", time: 4},
-    //     {name: "shane", content: "eagles game tomorrow", time: 5},
-    //     {name: "sumi", content: "just got back from japan", time: 6},
-    //     {name: "adora", content: "climbing", time: 7},
-    //     {name: "sidhika", content: "climbing for the first time", time: 8},
-    //     {name: "jacob", content: "running late sorry", time: 9}
+    //     {name: "kevin", content: "hello, again, world"},
+    //     {name: "isabelle", content: "i've had a thought"},
+    //     {name: "susannah", content: "super mario"},
+    //     {name: "maddie", content: "little susie's worker"},
+    //     {name: "adam", content: "arizona"},
+    //     {name: "shane", content: "eagles game tomorrow"},
+    //     {name: "sumi", content: "just got back from japan"},
+    //     {name: "adora", content: "climbing"},
+    //     {name: "sidhika", content: "climbing for the first time"},
+    //     {name: "jacob", content: "running late sorry"}
     // ]
     // const result = await dbMsgs.insertMany(docs);
     // console.log(`${result.insertedCount} documents inserted`);
