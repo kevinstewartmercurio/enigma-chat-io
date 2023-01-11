@@ -55,11 +55,13 @@ export default function HowItWorks(props) {
                     </li>
                 </ol>
                 <p>
-                    once <i>c'</i> is obtained the rotor on the right kicks, 
-                    after the right rotor has completed a full rotation 
-                    (26 kicks) the middle rotor kicks, after the middle
-                    rotor has completed a full rotation (26 kicks) the left
-                    rotor kicks. 
+                    once <i>c'</i> is obtained the first rotor kicks, 
+                    after the first rotor has completed a full rotation 
+                    (26 kicks) the second rotor kicks, after the second
+                    rotor has completed a full rotation (26 kicks) the third
+                    rotor kicks. at this point the process for encrypting 
+                    <i>c</i> is done and the machine can move on to the next
+                    letter.
                 </p>
                 <p>
                     <b>note:</b> the plugboard is not implemented in 
