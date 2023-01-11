@@ -55,14 +55,14 @@ export default function HowItWorks(props) {
                     </li>
                 </ol>
                 <p>
-                    once <i>c'</i> is obtained, the rotor on the right kicks,
-                    and after the right rotor has completed a full rotation 
-                    (26 kicks) the middle rotor kicks, and after the middle
+                    once <i>c'</i> is obtained the rotor on the right kicks, 
+                    after the right rotor has completed a full rotation 
+                    (26 kicks) the middle rotor kicks, after the middle
                     rotor has completed a full rotation (26 kicks) the left
-                    rotor kicks.
+                    rotor kicks. 
                 </p>
                 <p>
-                    <b>note:</b>the plugboard is not implemented in 
+                    <b>note:</b> the plugboard is not implemented in 
                     enigmachat.io. this means that the encryption used in
                     enigmachat.io is not as strong as the encryption used by
                     the original enigma machine, but there are 17,576 possible
@@ -73,7 +73,7 @@ export default function HowItWorks(props) {
                 <p>
                     for more information on the enigma machine, check out this
                     page <a href="https://brilliant.org/wiki/enigma-machine/#:~:text=An%20Enigma%20machine%20is%20a,time%20the%20code%20seemed%20unbreakable." 
-                        target="_blank">
+                        target="_blank" rel="noreferrer">
                         https://brilliant.org/wiki/enigma-machine/
                     </a>
                 </p>
