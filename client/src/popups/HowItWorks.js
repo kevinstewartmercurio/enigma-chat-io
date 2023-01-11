@@ -59,9 +59,9 @@ export default function HowItWorks(props) {
                     after the first rotor has completed a full rotation 
                     (26 kicks) the second rotor kicks, after the second
                     rotor has completed a full rotation (26 kicks) the third
-                    rotor kicks. at this point the process for encrypting 
-                    <i>c</i> is done and the machine can move on to the next
-                    letter.
+                    rotor kicks. at this point the process for 
+                    encrypting <i>c</i> is done and the machine can move on to 
+                    the next letter.
                 </p>
                 <p>
                     <b>note:</b> the plugboard is not implemented in 
