@@ -3,50 +3,63 @@ import React from "react";
 import "./Rotors.css";
 
 export default function Rotors(props) {
-    // let mappingStr1 = "ekmflgdqvzntowyhxuspaibrcj";
-    // let mappingStr2 = "ajdksiruxblhwtmcqgznpyfvoe";
-    // let mappingStr3 = "bdfhjlcprtxvznyeiwgakmusqo";
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    // const {shareOffsets, offset1, offset2, offset3, ...rest} = props;
-
-    // console.log(offset1, " in Rotors.js");
+    const {shareOffset, offset1, offset2, offset3} = props;
 
     return (
         <div id="rotor-bar-wrapper">
           <div id="rotor-bar">
             <div className="rotor" id="rotor1">
-              <p className="rotor-txt">
-                <button className="rotor-btn">
+              <div>
+                <button className="rotor-btn" id="left-btn" onClick={(e) => {
+                    (offset1 === 0) ? shareOffset(1, 25) :
+                        shareOffset(1, (offset1 - 1));  
+                }}>
                   &lt;
                 </button>
-                &nbsp;A&nbsp;
-                <button className="rotor-btn">
+                <div className="rotor-txt">{alphabet[offset1]}</div>
+                <button className="rotor-btn" id="right-btn" onClick={(e) => {
+                    (offset1 === 25) ? shareOffset(1, 0) : 
+                        shareOffset(1, (offset1 + 1));
+                }}>
                   &gt;
                 </button>
-              </p>
+              </div>
             </div>
             <div className="rotor" id="rotor2">
-              <p className="rotor-txt">
-                <button className="rotor-btn">
+              <div>
+                <button className="rotor-btn" onClick={(e) => {
+                    (offset2 === 0) ? shareOffset(2, 25) :
+                        shareOffset(2, (offset2 - 1));
+                }}>
                   &lt;
                 </button>
-                &nbsp;A&nbsp;
-                <button className="rotor-btn">
+                <div className="rotor-txt">{alphabet[offset2]}</div>
+                <button className="rotor-btn" onClick={(e) => {
+                    (offset2 === 25) ? shareOffset(2, 0) :
+                        shareOffset(2, (offset2 + 1)); 
+                }}>
                   &gt;
                 </button>
-              </p>
+              </div>
             </div>
             <div className="rotor" id="rotor3">
-              <p className="rotor-txt">
-                <button className="rotor-btn">
+              <div>
+                <button className="rotor-btn" onClick={(e) => {
+                    (offset3 === 0) ? shareOffset(3, 25) :
+                        shareOffset(3, (offset3 - 1));
+                }}>
                   &lt;
                 </button>
-                &nbsp;A&nbsp;
-                <button className="rotor-btn">
+                <div className="rotor-txt">{alphabet[offset3]}</div>
+                <button className="rotor-btn" onClick={(e) => {
+                    (offset3 === 25) ? shareOffset(3, 0) :
+                        shareOffset(3, (offset3 + 1));
+                }}>
                   &gt;
                 </button>
-              </p>
+              </div>
             </div>
           </div>
         </div>

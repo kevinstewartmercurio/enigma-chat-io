@@ -1,29 +1,3 @@
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import React from 'react';
 import config from './config';
 import io from 'socket.io-client';
@@ -31,6 +5,7 @@ import io from 'socket.io-client';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
+import {encrypt} from "./encryption/encrypt";
 import BottomBar from './BottomBar';
 import './App.css';
 
@@ -51,8 +26,15 @@ class App extends React.Component {
   componentDidMount() {
     this.socket = io(config[process.env.NODE_ENV].endpoint);
 
-    // Load the last 10 messages in the window.
+    // Load messages in the window.
     this.socket.on('init', (msg, randomName) => {
+      let i = 0;
+      msg.forEach((subMsg) => {
+        msg[i]["content"] = encrypt(subMsg["content"], this.state.offset1,
+          this.state.offset2, this.state.offset3);
+        i++;
+      })
+
       // let msgReversed = msg.reverse();
       this.setState((state) => ({
         chat: [...state.chat, ...msg],
@@ -63,7 +45,8 @@ class App extends React.Component {
     // Update the chat if a new message is broadcasted.
     this.socket.on('push', (msg) => {
       this.setState((state) => ({
-        chat: [...state.chat, msg],
+        chat: [...state.chat, encrypt(msg, this.state.offset1, 
+            this.state.offset2, this.state.offset3)],
       }), this.scrollToBottom);
     });
   }
@@ -88,7 +71,8 @@ class App extends React.Component {
     // Send the new message to the server.
     this.socket.emit('message', {
       name: this.state.name,
-      content: this.state.content,
+      content: encrypt(encrypt(this.state.content, this.state.offset1, 
+          this.state.offset2, this.state.offset3), 0, 0, 0),
     });
 
     this.setState((state) => {
@@ -96,7 +80,8 @@ class App extends React.Component {
       return {
         chat: [...state.chat, {
           name: state.name,
-          content: state.content,
+          content: encrypt(state.content, this.state.offset1,
+              this.state.offset2, this.state.offset3),
         }],
         content: '',
       };
@@ -109,7 +94,8 @@ class App extends React.Component {
     chat.scrollTop = chat.scrollHeight;
   }
 
-  shareOffsets(n, offset) {
+  shareOffset( n, offset) {
+    this.socket.emit("init", this.state.chat, this.state.name);
     switch (n) {
       case 1:
         this.setState({
@@ -126,8 +112,18 @@ class App extends React.Component {
           offset3: offset
         });
         break;
+      case 4:
+        console.log("here");
+        break;
       default:
         break;
+    }
+  }
+
+  test() {
+    if ((this.state.offset1 === 0) && (this.state.offset2 === 0) &&
+      (this.state.offset3 === 0)) {
+      return 
     }
   }
 
@@ -142,7 +138,9 @@ class App extends React.Component {
                   {el.name}
                 </Typography>
                 <Typography variant="body1" className="content">
-                  {el.content}
+                  {/* {el.content} */}
+                  {encrypt(el.content, this.state.offset1, this.state.offset2,
+                    this.state.offset3)}
                 </Typography>
               </div>
             );
@@ -152,10 +150,8 @@ class App extends React.Component {
           id="bottomBar"
           content={this.state.content}
           handleContent={this.handleContent.bind(this)}
-          handleName={this.handleName.bind(this)}
           handleSubmit={this.handleSubmit.bind(this)}
-          name={this.state.name}
-          shareOffsets={this.shareOffsets.bind(this)}
+          shareOffset={this.shareOffset.bind(this)}
           offset1={this.state.offset1}
           offset2={this.state.offset2}
           offset3={this.state.offset3}

@@ -1,5 +1,8 @@
-const {MongoClient} = require('mongodb');
-const uri = "mongodb+srv://kevinstewartmercurio:ri2SVriEjJFupxeT@clusterksm.ahcsbsm.mongodb.net/?";
+// const {MongoClient} = require('mongodb');
+import {MongoClient} from "mongodb";
+import dotenv from "dotenv";
+dotenv.config({path: "../.env"});
+const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
@@ -37,10 +40,10 @@ async function main() {
 
 
     // // empty the messages collection
-    // const database = client.db("enigma-chat-io");
-    // const dbMsgs = database.collection("messages");
-    // const result = await dbMsgs.deleteMany();
-    // console.log(`deleted ${result.deletedCount} documents`);
+    const database = client.db("enigma-chat-io");
+    const dbMsgs = database.collection("messages");
+    const result = await dbMsgs.deleteMany();
+    console.log(`deleted ${result.deletedCount} documents`);
 
 
     // // prints the first 5 documents in the messages collection

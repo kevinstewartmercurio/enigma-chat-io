@@ -1,14 +1,14 @@
-const express = require('express');
-const router = express.Router();
+import express, { Router} from 'express';
+const router = Router();
 const app = express();
-const cors = require('cors');
-const http = require('http');
-const {Server} = require('socket.io');
+import cors from 'cors';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 // const http = require('http').Server(app);
-const path = require('path');
+import { join } from 'path';
 // const io = require('socket.io')(http);
 
-const Message = require('./Message');
+import Message from './Message.js';
 
 // const mongoose = require('mongoose');
 // mongoose.set('strictQuery', true);
@@ -17,13 +17,15 @@ const Message = require('./Message');
 //   useUnifiedTopology: true
 // });
 
-require('dotenv').config({path: '../.env'});
+// require('dotenv').config({path: '../.env'});
+import dotenv from "dotenv";
+dotenv.config({path: '../.env'});
 const uri = process.env.MONGODB_URI;
 // || "mongodb+srv://kevinstewartmercurio:ri2SVriEjJFupxeT@clusterksm.ahcsbsm.mongodb.net/&retryWrites=true&w=majority";
 const port = process.env.PORT;
 //|| 5000;
 
-const {MongoClient} = require('mongodb');
+import { MongoClient } from 'mongodb';
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -31,15 +33,18 @@ const client = new MongoClient(uri, {
 const database = client.db("enigma-chat-io");
 const dbMsgs = database.collection("messages");
 
-app.use('/', express.static(path.join(__dirname, '..', 'client', 'build')));
+import {dirname} from "path";
+import {fileURLToPath} from "url";
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.use('/', express.static(join(__dirname, '..', 'client', 'build')));
 app.use(cors());
-const server = http.createServer(app);
+const server = createServer(app);
 const io = new Server(server, {
   cors: {
       // when changing origin, also change proxy in client/package.json
       // http://localhost:5000, https://enigma-chat-io.herokuapp.com/
-      origin: 'http://localhost:3000',
-      // origin: 'https://enigmachat.io',
+      // origin: 'http://localhost:3000',
+      origin: 'https://enigmachat.io',
       methods: ['GET', 'POST'],
   },
 });

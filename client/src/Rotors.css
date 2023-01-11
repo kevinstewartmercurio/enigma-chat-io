@@ -1,10 +1,21 @@
 #rotor-bar {
-    /* border: 2px solid green; */
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
     text-align: center;
 }
 
 .rotor {
-    margin-left: 2%;
-    margin-right: 2%;
+    width: 15%;
     display: inline-block;
+    box-sizing: border-box;
+}
+
+.rotor-btn {
+    cursor: pointer;
+}
+
+.rotor-txt {
+    display: inline-block;
+    width: 32px;
+    font-size: 16px;
 }
