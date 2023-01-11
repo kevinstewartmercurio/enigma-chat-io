@@ -6,7 +6,10 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
 import {encrypt} from "./encryption/encrypt";
+import Navbar from "./Navbar";
 import BottomBar from './BottomBar';
+import HowToUse from './popups/HowToUse';
+import HowItWorks from './popups/HowItWorks';
 import './App.css';
 
 class App extends React.Component {
@@ -19,7 +22,8 @@ class App extends React.Component {
       name: '',
       offset1: 0,
       offset2: 0,
-      offset3: 0
+      offset3: 0,
+      activePopup: null
     };
   }
 
@@ -94,7 +98,7 @@ class App extends React.Component {
     chat.scrollTop = chat.scrollHeight;
   }
 
-  shareOffset( n, offset) {
+  shareOffset(n, offset) {
     this.socket.emit("init", this.state.chat, this.state.name);
     switch (n) {
       case 1:
@@ -120,43 +124,57 @@ class App extends React.Component {
     }
   }
 
-  test() {
-    if ((this.state.offset1 === 0) && (this.state.offset2 === 0) &&
-      (this.state.offset3 === 0)) {
-      return 
+  sharePopup(popupVal) {
+    this.setState({
+      activePopup: popupVal
+    });
+  }
+
+  getActivePopup() {
+    if (this.state.activePopup === "how to use") {
+      console.log("here");
+      return <HowToUse sharePopup={this.sharePopup.bind(this)}/>;
+    } else if (this.state.activePopup === "how it works") {
+      return <HowItWorks sharePopup={this.sharePopup.bind(this)}/>;
     }
+
+    return null;
   }
 
   render() {
     return (
-      <div className="App">
-        <Paper id="chat" elevation={3}>
-          {this.state.chat.map((el, index) => {
-            return (
-              <div key={index}>
-                <Typography variant="caption" className="name">
-                  {el.name}
-                </Typography>
-                <Typography variant="body1" className="content">
-                  {/* {el.content} */}
-                  {encrypt(el.content, this.state.offset1, this.state.offset2,
-                    this.state.offset3)}
-                </Typography>
-              </div>
-            );
-          })}
-        </Paper>
-        <BottomBar
-          id="bottomBar"
-          content={this.state.content}
-          handleContent={this.handleContent.bind(this)}
-          handleSubmit={this.handleSubmit.bind(this)}
-          shareOffset={this.shareOffset.bind(this)}
-          offset1={this.state.offset1}
-          offset2={this.state.offset2}
-          offset3={this.state.offset3}
-        />
-      </div>
+      <>
+        <div className="App">
+          <Navbar sharePopup={this.sharePopup.bind(this)}/>
+          <Paper id="chat" elevation={0}>
+            {this.state.chat.map((el, index) => {
+              return (
+                <div key={index}>
+                  <Typography variant="caption" className="name">
+                    {el.name}
+                  </Typography>
+                  <Typography variant="body1" className="content">
+                    {/* {el.content} */}
+                    {encrypt(el.content, this.state.offset1, this.state.offset2,
+                      this.state.offset3)}
+                  </Typography>
+                </div>
+              );
+            })}
+          </Paper>
+          <BottomBar
+            id="bottomBar"
+            content={this.state.content}
+            handleContent={this.handleContent.bind(this)}
+            handleSubmit={this.handleSubmit.bind(this)}
+            shareOffset={this.shareOffset.bind(this)}
+            offset1={this.state.offset1}
+            offset2={this.state.offset2}
+            offset3={this.state.offset3}
+          />
+          {this.getActivePopup()}
+        </div>
+      </>
     );
   }
 };

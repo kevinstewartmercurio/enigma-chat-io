@@ -1,0 +1,56 @@
+.popup-wrapper {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.54);
+    border-radius: 6px;
+    width: 50%;
+    padding: 24px 48px;
+    font-family: "Courier";
+    vertical-align: middle;
+}
+
+#how-it-works-content {
+    width: 62.5%;
+}
+
+.top-line {
+    width: 100%;
+    display: table;
+}
+
+.top-line-h1 {
+    margin: 0;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.exit-btn:hover {
+    text-decoration: underline;
+}
+
+.exit-btn {
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    font-family: "Courier";
+    font-size: 24px;
+    padding: 5px 0;
+    display: table-cell;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#img-wrapper {
+    text-align: center;
+    margin: 8px 0;
+}

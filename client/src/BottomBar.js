@@ -19,6 +19,7 @@ export default function BottomBar(props) {
               onChange={props.handleContent}
               value={props.content}
               placeholder="type your message..."
+              autoComplete='off'
             />
           </form>
         </div>
