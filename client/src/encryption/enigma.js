@@ -5,7 +5,7 @@ export class Enigma {
         this.fast = new Rotor(n1, offset1);
         this.medium = new Rotor(n2, offset2);
         this.slow = new Rotor(n3, offset3);
-        
+
         this.reflector = [
             ["a", "z"], ["b", "y"], ["c", "x"], ["d", "w"], ["e", "v"],
             ["f", "u"], ["g", "t"], ["h", "s"], ["i", "r"], ["j", "q"],
