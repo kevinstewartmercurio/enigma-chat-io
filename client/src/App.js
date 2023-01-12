@@ -50,9 +50,7 @@ class App extends React.Component {
 
     // Update the chat if a new message is broadcasted.
     this.socket.on('push', (msg) => {
-      console.log(msg);
-      msg["content"] = encrypt(msg["content"], 0, 0, 0)
-      console.log(msg);
+      msg["content"] = encrypt(msg["content"], 0, 0, 0);
       this.setState((state) => ({
         chat: [...state.chat, msg]
       }), this.scrollToBottom);
@@ -139,7 +137,6 @@ class App extends React.Component {
 
   getActivePopup() {
     if (this.state.activePopup === "how to use") {
-      console.log("here");
       return <HowToUse sharePopup={this.sharePopup.bind(this)}/>;
     } else if (this.state.activePopup === "how it works") {
       return <HowItWorks sharePopup={this.sharePopup.bind(this)}/>;
