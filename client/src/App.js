@@ -32,12 +32,15 @@ class App extends React.Component {
 
     // Load messages in the window.
     this.socket.on('init', (msg, randomName) => {
-      let i = 0;
-      msg.forEach((subMsg) => {
-        msg[i]["content"] = encrypt(subMsg["content"], this.state.offset1,
-          this.state.offset2, this.state.offset3);
-        i++;
-      })
+      if ((this.state.offset1 === 0) && (this.state.offset2 === 0) &&
+        (this.state.offset3 === 0)) {
+        let i = 0;
+        msg.forEach((subMsg) => {
+          msg[i]["content"] = encrypt(subMsg["content"], this.state.offset1,
+            this.state.offset2, this.state.offset3);
+          i++;
+        })
+      }
 
       // let msgReversed = msg.reverse();
       this.setState((state) => ({
@@ -48,9 +51,18 @@ class App extends React.Component {
 
     // Update the chat if a new message is broadcasted.
     this.socket.on('push', (msg) => {
+      console.log(msg);
+      // if ((this.state.offset1 !== 0) || (this.state.offset2 !== 0) ||
+      //   (this.state.offset3 !== 0)) {
+      //   msg["content"] = encrypt(msg["content"], 0, 0, 0);
+      // } else {
+      //   msg["content"] = encrypt(msg["content"], 0, 0, 0);
+      // }
+      msg["content"] = encrypt(msg["content"], 0, 0, 0);
+      console.log(msg);
+      // msg["content"] = encrypt(msg["content"], this.state.offset1,
+      //   this.state.offset2, this.state.offset3);
       // console.log(msg);
-      msg["content"] = encrypt(msg["content"], this.state.offset1,
-        this.state.offset2, this.state.offset3);
       // console.log(msg);
       this.setState((state) => ({
         // chat: [...state.chat, encrypt(msg["content"], this.state.offset1, 
