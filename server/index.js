@@ -84,8 +84,8 @@ io.on('connection', async (socket) => {
     // message.save((err) => {
     //   if (err) return console.error(err);
     // });
-    const result = dbMsgs.insertOne(message);
-    console.log(`document inserted with id: ${result.insertedId}`);
+    dbMsgs.insertOne(message);
+    // console.log(`document inserted with id: ${result.insertedId}`);
 
     // Notify all other users about a new message.
     socket.broadcast.emit('push', msg);
