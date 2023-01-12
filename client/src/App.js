@@ -32,17 +32,16 @@ class App extends React.Component {
 
     // Load messages in the window.
     this.socket.on('init', (msg, randomName) => {
-      if ((this.state.offset1 === 0) && (this.state.offset2 === 0) &&
-        (this.state.offset3 === 0)) {
-        let i = 0;
-        msg.forEach((subMsg) => {
-          msg[i]["content"] = encrypt(subMsg["content"], this.state.offset1,
-            this.state.offset2, this.state.offset3);
-          i++;
-        })
-      }
+      // if ((this.state.offset1 === 0) && (this.state.offset2 === 0) &&
+      //   (this.state.offset3 === 0)) {
+      //   let i = 0;
+      //   msg.forEach((subMsg) => {
+      //     msg[i]["content"] = encrypt(subMsg["content"], this.state.offset1,
+      //       this.state.offset2, this.state.offset3);
+      //     i++;
+      //   })
+      // }
 
-      // let msgReversed = msg.reverse();
       this.setState((state) => ({
         chat: [...state.chat, ...msg],
         name: randomName
@@ -51,22 +50,10 @@ class App extends React.Component {
 
     // Update the chat if a new message is broadcasted.
     this.socket.on('push', (msg) => {
-      console.log(msg);
-      // if ((this.state.offset1 !== 0) || (this.state.offset2 !== 0) ||
-      //   (this.state.offset3 !== 0)) {
-      //   msg["content"] = encrypt(msg["content"], 0, 0, 0);
-      // } else {
-      //   msg["content"] = encrypt(msg["content"], 0, 0, 0);
-      // }
-      msg["content"] = encrypt(msg["content"], 0, 0, 0);
-      console.log(msg);
-      // msg["content"] = encrypt(msg["content"], this.state.offset1,
-      //   this.state.offset2, this.state.offset3);
       // console.log(msg);
+      // msg["content"] = encrypt(msg["content"], 0, 0, 0)
       // console.log(msg);
       this.setState((state) => ({
-        // chat: [...state.chat, encrypt(msg["content"], this.state.offset1, 
-        //     this.state.offset2, this.state.offset3)],
         chat: [...state.chat, msg]
       }), this.scrollToBottom);
     });
@@ -92,8 +79,9 @@ class App extends React.Component {
     // Send the new message to the server.
     this.socket.emit('message', {
       name: this.state.name,
-      content: encrypt(encrypt(this.state.content, this.state.offset1, 
-          this.state.offset2, this.state.offset3), 0, 0, 0),
+      content: this.state.content
+      // content: encrypt(encrypt(this.state.content, this.state.offset1, 
+      //     this.state.offset2, this.state.offset3), 0, 0, 0),
     });
 
 
@@ -102,8 +90,9 @@ class App extends React.Component {
       return {
         chat: [...state.chat, {
           name: state.name,
-          content: encrypt(state.content, this.state.offset1,
-              this.state.offset2, this.state.offset3),
+          // content: encrypt(state.content, this.state.offset1,
+          //     this.state.offset2, this.state.offset3),
+          content: state.content
         }],
         content: '',
       };
@@ -172,15 +161,11 @@ class App extends React.Component {
                     {el.name}
                   </Typography>
                   <Typography variant="body1" className="content">
-                    {/* {el.content} */}
-                    {/* problem here where el.content is undefined */}
-                    {/* {console.log(typeof(el))} */}
-                    {(typeof(el) === "string") ? encrypt(el, this.state.offset1,
+                    {el.content}
+                    {/* {(typeof(el) === "string") ? encrypt(el, this.state.offset1,
                       this.state.offset2, this.state.offset3) : 
                       encrypt(el.content, this.state.offset1, 
-                      this.state.offset2, this.state.offset3)}
-                    {/* {encrypt(el.content, this.state.offset1, this.state.offset2,
-                      this.state.offset3)} */}
+                      this.state.offset2, this.state.offset3)} */}
                   </Typography>
                 </div>
               );
