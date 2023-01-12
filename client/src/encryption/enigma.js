@@ -6,17 +6,25 @@ export class Enigma {
         this.medium = new Rotor(n2, offset2);
         this.slow = new Rotor(n3, offset3);
 
-        let temp = [];
-        this.reflector = [];
-        let alphabet = "abcdefghijklmnopqrstuvwxyz";
-        let alphabetRev = "zyxwvutsrqponmlkjihgfedcba";
-        for (let i = 0; i < alphabet.length; i++) {
-            temp.push(alphabet[i]);
-            temp.push(alphabetRev[i]);
+        // let temp = [];
+        // this.reflector = [];
+        this.reflector = [
+            ["a", "z"], ["b", "y"], ["c", "x"], ["d", "w"], ["e", "v"],
+            ["f", "u"], ["g", "t"], ["h", "s"], ["i", "r"], ["j", "q"],
+            ["k", "p"], ["l", "o"], ["m", "n"], ["n", "m"], ["o", "l"],
+            ["p", "k"], ["q", "j"], ["r", "i"], ["s", "h"], ["t", "g"],
+            ["u", "f"], ["v", "e"], ["w", "d"], ["x", "c"], ["y", "b"],
+            ["z", "a"]
+        ];
+        // let alphabet = "abcdefghijklmnopqrstuvwxyz";
+        // let alphabetRev = "zyxwvutsrqponmlkjihgfedcba";
+        // for (let i = 0; i < alphabet.length; i++) {
+        //     temp.push(alphabet[i]);
+        //     temp.push(alphabetRev[i]);
 
-            this.reflector.push(temp);
-            temp = [];
-        }
+        //     this.reflector.push(temp);
+        //     temp = [];
+        // }
 
         this.kickCount = 0;
     }

@@ -48,9 +48,14 @@ class App extends React.Component {
 
     // Update the chat if a new message is broadcasted.
     this.socket.on('push', (msg) => {
+      // console.log(msg);
+      // msg["content"] = encrypt(msg["content"], this.state.offset1,
+      //   this.state.offset2, this.state.offset3);
+      // console.log(msg);
       this.setState((state) => ({
-        chat: [...state.chat, encrypt(msg, this.state.offset1, 
-            this.state.offset2, this.state.offset3)],
+        // chat: [...state.chat, encrypt(msg["content"], this.state.offset1, 
+        //     this.state.offset2, this.state.offset3)],
+        chat: [...state.chat, msg]
       }), this.scrollToBottom);
     });
   }
@@ -78,6 +83,7 @@ class App extends React.Component {
       content: encrypt(encrypt(this.state.content, this.state.offset1, 
           this.state.offset2, this.state.offset3), 0, 0, 0),
     });
+
 
     this.setState((state) => {
       // Update the chat with the user's message and remove the current message.
@@ -155,8 +161,14 @@ class App extends React.Component {
                   </Typography>
                   <Typography variant="body1" className="content">
                     {/* {el.content} */}
-                    {encrypt(el.content, this.state.offset1, this.state.offset2,
-                      this.state.offset3)}
+                    {/* problem here where el.content is undefined */}
+                    {/* {console.log(typeof(el))} */}
+                    {(typeof(el) === "string") ? encrypt(el, this.state.offset1,
+                      this.state.offset2, this.state.offset3) : 
+                      encrypt(el.content, this.state.offset1, 
+                      this.state.offset2, this.state.offset3)}
+                    {/* {encrypt(el.content, this.state.offset1, this.state.offset2,
+                      this.state.offset3)} */}
                   </Typography>
                 </div>
               );
