@@ -5,9 +5,7 @@ export class Enigma {
         this.fast = new Rotor(n1, offset1);
         this.medium = new Rotor(n2, offset2);
         this.slow = new Rotor(n3, offset3);
-
-        // let temp = [];
-        // this.reflector = [];
+        
         this.reflector = [
             ["a", "z"], ["b", "y"], ["c", "x"], ["d", "w"], ["e", "v"],
             ["f", "u"], ["g", "t"], ["h", "s"], ["i", "r"], ["j", "q"],
@@ -16,22 +14,20 @@ export class Enigma {
             ["u", "f"], ["v", "e"], ["w", "d"], ["x", "c"], ["y", "b"],
             ["z", "a"]
         ];
-        // let alphabet = "abcdefghijklmnopqrstuvwxyz";
-        // let alphabetRev = "zyxwvutsrqponmlkjihgfedcba";
-        // for (let i = 0; i < alphabet.length; i++) {
-        //     temp.push(alphabet[i]);
-        //     temp.push(alphabetRev[i]);
-
-        //     this.reflector.push(temp);
-        //     temp = [];
-        // }
 
         this.kickCount = 0;
     }
 
     mapChar(c) {
-        if (c === " ") {
-            return " ";
+        let alphabet = "abcdefghijklmnopqrstuvwxyz";
+        let cInAlphabet = false;
+        for (let i = 0; i < alphabet.length; i++) {
+            if (alphabet[i] === c) {
+                cInAlphabet = true;
+            }
+        }
+        if (cInAlphabet === false) {
+            return c;
         }
 
         let retChar = c;

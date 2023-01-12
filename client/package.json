@@ -40,5 +40,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://enigma-chat-io.heroku.app"
+  "proxy": "https://enigma-chat-io.herokuapp.com/"
 }
