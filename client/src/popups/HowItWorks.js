@@ -22,8 +22,7 @@ export default function HowItWorks(props) {
                 </div>
                 <p>
                     enigmachat.io features one chat room for all users. in order
-                    to maintain a level of privacy, we rely on the enigma
-                    machine.
+                    to maintain a level of privacy, it uses an enigma machine.
                 </p>
                 <div id="img-wrapper">
                     <img src={diagram} alt="enigma machine diagram" 
@@ -38,12 +37,12 @@ export default function HowItWorks(props) {
                         letter
                     </li>
                     <li>
-                        sends that new letter through three rotors, eaching one 
+                        sends that new letter through three rotors, each one 
                         mapping to another new letter
                     </li>
                     <li>
-                        maps that new letter through the reflector to obtain 
-                        yet another new letter
+                        maps the resulting new letter through the reflector to 
+                        obtain yet another new letter
                     </li>
                     <li>
                         sends that new letter back through each of the three 
@@ -60,17 +59,17 @@ export default function HowItWorks(props) {
                     (26 kicks) the second rotor kicks, after the second
                     rotor has completed a full rotation (26 kicks) the third
                     rotor kicks. at this point the process for 
-                    encrypting <i>c</i> is done and the machine can move on to 
-                    the next letter.
+                    encrypting <i>c</i> is done and the machine moves on to the
+                    next letter in the message.
                 </p>
                 <p>
                     <b>note:</b> the plugboard is not implemented in 
                     enigmachat.io. this means that the encryption used in
                     enigmachat.io is not as strong as the encryption used by
-                    the original enigma machine, but there are 17,576 possible
-                    rotor offset combinations and if someone wanted to decipher
-                    your message without knowing the offsets you used they would
-                    have to try each combination.
+                    the original enigma machine. that said, there are 17,576 
+                    possible rotor offset combinations and if someone wanted to 
+                    decipher your message without knowing the offsets you used 
+                    they would have to try each combination.
                 </p>
                 <p>
                     for more information on the enigma machine, check out this

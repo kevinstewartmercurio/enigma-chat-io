@@ -32,7 +32,7 @@ export default function HowItsBuilt(props) {
                     <Icon className="popup-icon" icon="fa6-brands:node"/>
                 </div>
                 <p>
-                    additionally the enigma module responsible for all
+                    additionally, the enigma module responsible for all
                     encryption was written in JavaScript, the browser icon came
                     from&nbsp;
                     <a href="https://www.flaticon.com/free-icons/encrypted"
