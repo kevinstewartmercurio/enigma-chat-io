@@ -31,8 +31,8 @@ const io = new Server(server, {
   cors: {
       // when changing origin, also change proxy in client/package.json
       // http://localhost:5000, https://enigma-chat-io.herokuapp.com/
-      origin: 'http://localhost:3000',
-      // origin: 'https://enigmachat.io',
+      // origin: 'http://localhost:3000',
+      origin: 'https://enigmachat.io',
       methods: ['GET', 'POST'],
   },
 });
