@@ -15,13 +15,19 @@ export default function Navbar(props) {
                 props.sharePopup("how to use");
                 r.style.setProperty("--blurVal", "blur(3px)");
             }}>
-                how to use
+              how to use
             </button>
             <button className="nav-btn" id="explanation-btn" onClick={(e) => {
                 props.sharePopup("how it works");
                 r.style.setProperty("--blurVal", "blur(3px)");
             }}>
-                how it works
+              how it works
+            </button>
+            <button className="nav-btn" id="tools-btn" onClick={(e) => {
+              props.sharePopup("how it's built");
+              r.style.setProperty("--blurVal", "blur(3px");
+            }}>
+              how it's built
             </button>
           </div>
         </div>

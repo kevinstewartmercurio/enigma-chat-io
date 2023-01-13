@@ -14,9 +14,11 @@
     border: 1px solid rgba(0, 0, 0, 0.54);
     border-radius: 6px;
     width: 50%;
+    max-height: 90%;
     padding: 24px 48px;
     font-family: "Courier";
     vertical-align: middle;
+    overflow-y: auto;
 }
 
 #how-it-works-content {
@@ -50,7 +52,33 @@
     cursor: pointer;
 }
 
+a:link, a:visited {
+    color: #000000;
+}
+
 #img-wrapper {
     text-align: center;
     margin: 8px 0;
+}
+
+#icon-bar {
+    width: 100%;
+    margin: 36px 0;
+    text-align: center;
+}
+
+.popup-icon {
+    font-size: 32px;
+    margin: 0 2.25%;
+}
+
+#credit-tag-wrapper {
+    width: 100%;
+    text-align: center;
+    margin: 36px 0 0 0;
+}
+
+#credit-tag {
+    font-size: 13px;
+    margin-bottom: 0;
 }

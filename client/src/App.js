@@ -10,7 +10,9 @@ import Navbar from "./Navbar";
 import BottomBar from './BottomBar';
 import HowToUse from './popups/HowToUse';
 import HowItWorks from './popups/HowItWorks';
+import HowItsBuilt from './popups/HowItsBuilt';
 import './App.css';
+import "./popups/popup.css";
 
 // when false, all messages get stored in the database as plaintext (so any
 // message already in the database when toggling from false to true will have
@@ -50,7 +52,6 @@ class App extends React.Component {
       }
 
       this.setState(() => ({
-        // chat: [...state.chat, ...msg],
         chat: [...msg],
         name: randomName
       }), this.scrollToBottom);
@@ -93,9 +94,6 @@ class App extends React.Component {
     // Send the new message to the server.
     this.socket.emit('message', {
       name: this.state.name,
-      // content: this.state.content
-      // content: encrypt(encrypt(this.state.content, this.state.offset1, 
-      //     this.state.offset2, this.state.offset3), 0, 0, 0),
       content: newContent
     });
 
@@ -110,9 +108,6 @@ class App extends React.Component {
       return {
         chat: [...state.chat, {
           name: state.name,
-          // content: state.content
-          // content: encrypt(state.content, this.state.offset1,
-          //     this.state.offset2, this.state.offset3),
           content: newContent
         }],
         content: '',
@@ -163,6 +158,8 @@ class App extends React.Component {
       return <HowToUse sharePopup={this.sharePopup.bind(this)}/>;
     } else if (this.state.activePopup === "how it works") {
       return <HowItWorks sharePopup={this.sharePopup.bind(this)}/>;
+    } else if (this.state.activePopup === "how it's built") {
+      return <HowItsBuilt sharePopup={this.sharePopup.bind(this)}/>;
     }
 
     return null;
@@ -181,7 +178,6 @@ class App extends React.Component {
                     {el.name}
                   </Typography>
                   <Typography variant="body1" className="content">
-                    {/* {el.content} */}
                     {(toggleEncryption === true) ? ((typeof(el) === "string") ? 
                       encrypt(el, this.state.offset1, this.state.offset2, 
                       this.state.offset3) : encrypt(el.content, 

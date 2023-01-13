@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./popup.css";
-
 export default function HowToUse(props) {
     let r = document.querySelector(":root");
 

@@ -16,6 +16,9 @@
     "socket.io-client": "^4.5.4",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "@iconify/react": "^4.0.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -40,5 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://enigma-chat-io.herokuapp.com/"
+  "proxy": "http://enigma-chat-io.herokuapp.com/"
 }

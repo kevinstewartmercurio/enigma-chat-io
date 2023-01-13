@@ -4,26 +4,14 @@ const app = express();
 import cors from 'cors';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-// const http = require('http').Server(app);
 import { join } from 'path';
-// const io = require('socket.io')(http);
 
 import Message from './Message.js';
 
-// const mongoose = require('mongoose');
-// mongoose.set('strictQuery', true);
-// mongoose.connect(uri, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// });
-
-// require('dotenv').config({path: '../.env'});
 import dotenv from "dotenv";
 dotenv.config({path: '../.env'});
 const uri = process.env.MONGODB_URI;
-// || "mongodb+srv://kevinstewartmercurio:ri2SVriEjJFupxeT@clusterksm.ahcsbsm.mongodb.net/&retryWrites=true&w=majority";
 const port = process.env.PORT;
-//|| 5000;
 
 import { MongoClient } from 'mongodb';
 const client = new MongoClient(uri, {
@@ -58,13 +46,7 @@ io.on('connection', async (socket) => {
   const randomInt = Math.floor(Math.random() * 99999999);
   const randomName = "user" + randomInt.toString();
 
-  // Get the last 10 messages from the database.
-  // Message.find().sort({createdAt: -1}).limit(10).exec((err, messages) => {
-  //   if (err) return console.error(err);
-
-  //   // Send the last messages to the user.
-  //   socket.emit('init', messages);
-  // });
+  // Get messages from the database.
   const cursor = dbMsgs.find({});
   let messages = [];
   await cursor.forEach((msg) => messages.push(msg));
@@ -75,17 +57,12 @@ io.on('connection', async (socket) => {
   socket.on('message', (msg) => {
     // Create a message with the content and the name of the user.
     const message = new Message({
-      // name: msg.name,
       name: randomName,
       content: msg.content
     });
 
     // Save the message to the database.
-    // message.save((err) => {
-    //   if (err) return console.error(err);
-    // });
     dbMsgs.insertOne(message);
-    // console.log(`document inserted with id: ${result.insertedId}`);
 
     // Notify all other users about a new message.
     socket.broadcast.emit('push', msg);
