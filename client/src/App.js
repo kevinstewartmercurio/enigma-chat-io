@@ -12,6 +12,11 @@ import HowToUse from './popups/HowToUse';
 import HowItWorks from './popups/HowItWorks';
 import './App.css';
 
+// when false, all messages get stored in the database as plaintext (so any
+// message already in the database when toggling from false to true will have
+// an encryption key of AAA)
+const toggleEncryption = true;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -32,25 +37,30 @@ class App extends React.Component {
 
     // Load messages in the window.
     this.socket.on('init', (msg, randomName) => {
-      if ((this.state.offset1 === 0) && (this.state.offset2 === 0) &&
-        (this.state.offset3 === 0)) {
-        let i = 0;
-        msg.forEach((subMsg) => {
-          msg[i]["content"] = encrypt(subMsg["content"], this.state.offset1,
-            this.state.offset2, this.state.offset3);
-          i++;
-        })
+      if (toggleEncryption === true) {
+        if ((this.state.offset1 === 0) && (this.state.offset2 === 0) &&
+          (this.state.offset3 === 0)) {
+          let i = 0;
+          msg.forEach((subMsg) => {
+            msg[i]["content"] = encrypt(subMsg["content"], this.state.offset1,
+              this.state.offset2, this.state.offset3);
+            i++;
+          })
+        }
       }
 
-      this.setState((state) => ({
-        chat: [...state.chat, ...msg],
+      this.setState(() => ({
+        // chat: [...state.chat, ...msg],
+        chat: [...msg],
         name: randomName
       }), this.scrollToBottom);
     });
 
     // Update the chat if a new message is broadcasted.
     this.socket.on('push', (msg) => {
-      msg["content"] = encrypt(msg["content"], 0, 0, 0);
+      if (toggleEncryption === true) {
+        msg["content"] = encrypt(msg["content"], 0, 0, 0);
+      }
       this.setState((state) => ({
         chat: [...state.chat, msg]
       }), this.scrollToBottom);
@@ -74,23 +84,36 @@ class App extends React.Component {
     // Prevent the form to reload the current page.
     event.preventDefault();
 
+    let newContent = this.state.content;
+    if (toggleEncryption === true) {
+      newContent = encrypt(encrypt(this.state.content, this.state.offset1, 
+        this.state.offset2, this.state.offset3), 0, 0, 0);
+    }
+
     // Send the new message to the server.
     this.socket.emit('message', {
       name: this.state.name,
       // content: this.state.content
-      content: encrypt(encrypt(this.state.content, this.state.offset1, 
-          this.state.offset2, this.state.offset3), 0, 0, 0),
+      // content: encrypt(encrypt(this.state.content, this.state.offset1, 
+      //     this.state.offset2, this.state.offset3), 0, 0, 0),
+      content: newContent
     });
 
-
     this.setState((state) => {
+      let newContent = state.content;
+      if (toggleEncryption === true) {
+        newContent = encrypt(state.content, this.state.offset1,
+          this.state.offset2, this.state.offset3);
+      }
+
       // Update the chat with the user's message and remove the current message.
       return {
         chat: [...state.chat, {
           name: state.name,
-          content: encrypt(state.content, this.state.offset1,
-              this.state.offset2, this.state.offset3),
           // content: state.content
+          // content: encrypt(state.content, this.state.offset1,
+          //     this.state.offset2, this.state.offset3),
+          content: newContent
         }],
         content: '',
       };
@@ -159,10 +182,11 @@ class App extends React.Component {
                   </Typography>
                   <Typography variant="body1" className="content">
                     {/* {el.content} */}
-                    {(typeof(el) === "string") ? encrypt(el, this.state.offset1,
-                      this.state.offset2, this.state.offset3) : 
-                      encrypt(el.content, this.state.offset1, 
-                      this.state.offset2, this.state.offset3)}
+                    {(toggleEncryption === true) ? ((typeof(el) === "string") ? 
+                      encrypt(el, this.state.offset1, this.state.offset2, 
+                      this.state.offset3) : encrypt(el.content, 
+                      this.state.offset1, this.state.offset2, 
+                      this.state.offset3)) : el.content}
                   </Typography>
                 </div>
               );
