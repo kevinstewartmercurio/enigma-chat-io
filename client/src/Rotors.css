@@ -1,12 +1,11 @@
 #rotor-bar {
-    margin-top: 1.5%;
-    margin-bottom: 1.5%;
+    width: 60%;
+    margin: 1.5% auto;
     text-align: center;
 }
 
 .rotor {
-    width: max-content;
-    margin: 0 4.5%;
+    width: calc(100% / 3);
     display: inline-block;
     box-sizing: border-box;
 }
@@ -23,7 +22,12 @@
     font-family: "Courier";
 }
 
+
 @media (max-width: 768px) {
+    #rotor-bar {
+        width: 100%;
+    }
+
     .rotor-btn {
         scale: .9;
     }
@@ -34,8 +38,8 @@
 }
 
 @media (max-width: 425px) {
-    .rotor {
-        margin: 0 3%;
+    #rotor-bar {
+        width: 90%;
     }
 
     #rotor1 {
@@ -48,8 +52,18 @@
 }
 
 @media (max-width: 375px) {
+    #rotor-bar {
+        width: 100%;
+    }
+
     .rotor-txt {
         width: 24px;
         font-size: 12px;
+    }
+}
+
+@media (max-width: 320px) {
+    .rotor {
+        scale: .875;
     }
 }
