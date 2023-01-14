@@ -10,10 +10,8 @@ import Message from './Message.js';
 
 import dotenv from "dotenv";
 dotenv.config({path: '../.env'});
-// const uri = process.env.MONGODB_URI;
-// const port = process.env.PORT;
-const uri = "mongodb+srv://kevinstewartmercurio:Yfow4EaW1Au0eTcK@clusterksm.ahcsbsm.mongodb.net/?retryWrites=true&w=majority";
-const port = 5000;
+const uri = process.env.MONGODB_URI;
+const port = process.env.PORT;
 
 import { MongoClient } from 'mongodb';
 const client = new MongoClient(uri, {
