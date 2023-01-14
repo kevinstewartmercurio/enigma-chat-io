@@ -28,3 +28,13 @@ body {
   padding: 0;
   margin: 0;
 }
+
+@media (max-width: 768px) {
+  .name {
+    font-size: 8px !important;
+  }
+
+  .content {
+    font-size: 12px !important;
+  }
+}

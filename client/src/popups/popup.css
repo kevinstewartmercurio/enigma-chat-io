@@ -30,7 +30,12 @@
     display: table;
 }
 
-.top-line-h1 {
+.top-line-header, .popup-header {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.top-line-header {
     margin: 0;
     display: table-cell;
     vertical-align: middle;
@@ -52,24 +57,38 @@
     cursor: pointer;
 }
 
+.popup-block {
+    width: 100%;
+}
+
 a:link, a:visited {
     color: #000000;
 }
 
 #img-wrapper {
-    text-align: center;
+    width: 100%;
     margin: 8px 0;
+    text-align: center;
 }
 
 #icon-bar {
     width: 100%;
     margin: 36px 0;
+    display: table;
     text-align: center;
 }
 
+.icon-wrapper {
+    width: max-content;
+    margin: 0 2.75%;
+    display: inline-block;
+}
+
 .popup-icon {
-    font-size: 32px;
-    margin: 0 2.25%;
+    position: relative;
+    top: 50%;
+    transform: translateY(8%);
+    font-size: 28px;
 }
 
 #credit-tag-wrapper {
@@ -81,4 +100,99 @@ a:link, a:visited {
 #credit-tag {
     font-size: 13px;
     margin-bottom: 0;
+}
+
+@media (max-width: 1024px) {
+    .icon-wrapper {
+        margin: 0;
+    }
+
+    #heroku-wrapper, #mongo-wrapper {
+        width: 50%;
+        margin-bottom: 6px;
+    }
+
+    #express-wrapper, #react-wrapper, #node-wrapper {
+        width: calc(100% / 3);
+        margin-top: 6px;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-line {
+        width: 106%;
+    }
+
+    .top-line-header, .popup-header {
+        font-size: 28px;
+        vertical-align: top;
+    }
+
+    .exit-btn {
+        margin-left: 12px;
+        padding-top: 2.5px;
+        font-size: 20px;
+    }
+
+    .popup-block {
+        font-size: 12px;
+    }
+
+    #diagram {
+        width: 215px;
+    }
+
+    #icon-bar {
+        margin: 24px 0;
+    }
+
+    .popup-icon {
+        font-size: 24px;
+    }
+
+    #heroku-wrapper {
+        width: 100%;
+    }
+
+    #mongo-wrapper, #express-wrapper, #react-wrapper, #node-wrapper {
+        width: 50%;
+    }
+
+    #credit-tag-wrapper {
+        margin-top: 24px;
+    }
+
+    #credit-tag {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 425px) {
+    .top-line {
+        width: 110%;
+    }
+
+    .popup-icon {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 375px) {
+    .top-line {
+        width: 114%;
+    }
+
+    #diagram {
+        width: 200px;
+    }
+}
+
+@media (max-width: 320px) {
+    .top-line {
+        width: 116%;
+    }
+
+    .popup-icon {
+        font-size: 18px;
+    }
 }

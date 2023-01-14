@@ -18,3 +18,9 @@
     text-transform: lowercase;
     outline: none;
 }
+
+@media (max-width: 768px) {
+    #input-base {
+        font-size: 12px;
+    }
+}
