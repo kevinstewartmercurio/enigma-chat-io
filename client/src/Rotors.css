@@ -22,7 +22,6 @@
     font-family: "Courier";
 }
 
-
 @media (max-width: 768px) {
     #rotor-bar {
         width: 100%;
@@ -64,6 +63,25 @@
 
 @media (max-width: 320px) {
     .rotor {
-        scale: .875;
+        width: max-content;
+        margin: 0 2%;
+    }
+
+    .rotor-txt {
+        width: 9px;
+    }
+
+    #rotor1 {
+        margin-left: 0 !important;
+    }
+
+    #rotor3 {
+        margin-right: 0 !important;
+    }
+}
+
+@media (max-width: 297px) {
+    .rotor {
+        margin: 0 1%;
     }
 }
