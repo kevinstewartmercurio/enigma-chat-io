@@ -16,7 +16,7 @@ A real-time chat application with a twist.
 
 All messages are encrypted and decrypted using an Enigma machine emulator. In order to read messages you’ll need to know the ``rotor settings” (the three letters used to encrypt) used by the author, and in order for someone to read your messages they’ll need to know your rotor settings.
 
-*(Note: Since the three rotors can each individually be one of 26 different letters, there are 2600 possible rotor settings you can use to encrypt your messages. The complexity of this emulator is far less than that of the original Enigma machine. To learn more about the original Enigma machine, visit [https://brilliant.org/wiki/enigma-machine/](https://brilliant.org/wiki/enigma-machine/).)*
+*(Note: Since the three rotors can each individually be one of 26 different letters, there are 17,576 possible rotor settings you can use to encrypt your messages. The complexity of this emulator is far less than that of the original Enigma machine. To learn more about the original Enigma machine, visit [https://brilliant.org/wiki/enigma-machine/](https://brilliant.org/wiki/enigma-machine/).)*
 
 ## 🛜 Data Flow
 The whole idea of this application is to protect messages. Therefore, plaintext is only ever seen client-side (either to someone with the proper rotor settings or to someone using brute force). Here’s a simple explanation of how messages are processed:
