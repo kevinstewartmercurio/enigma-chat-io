@@ -14,7 +14,7 @@ A real-time chat application with a twist.
 ## 🧠 Concept
 [enigmachat.io](https://www.enigmachat.io) takes a unique approach to the traditional chat application. Rather than allowing users to switch between different conversations, [enigmachat.io](https://www.enigmachat.io) provides only one chat room for all users. By itself this implementation wouldn’t be very useful, as users have no assurance of privacy. That’s where the Enigma encryption comes in.
 
-All messages are encrypted and decrypted using an Enigma machine emulator. In order to read messages you’ll need to know the ``rotor settings” (the three letters used to encrypt) used by the author, and in order for someone to read your messages they’ll need to know your rotor settings.
+All messages are encrypted and decrypted using an Enigma machine emulator. In order to read messages you’ll need to know the "rotor settings" (the three letters used to encrypt) used by the author, and in order for someone to read your messages they’ll need to know your rotor settings.
 
 *(Note: Since the three rotors can each individually be one of 26 different letters, there are 17,576 possible rotor settings you can use to encrypt your messages. The complexity of this emulator is far less than that of the original Enigma machine. To learn more about the original Enigma machine, visit [https://brilliant.org/wiki/enigma-machine/](https://brilliant.org/wiki/enigma-machine/).)*
 
